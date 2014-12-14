@@ -1,6 +1,6 @@
 grails {
     mongo {
-        connectionString = "mongodb://cscie56:harvard@ds061620.mongolab.com:61620/cscie56-physiciandb"
+        connectionString = "mongodb://heroku_app32514543:s3b4c9nj8bplkskq70vfbf1rom@ds063140.mongolab.com:63140/heroku_app32514543"
     }
 }
 
