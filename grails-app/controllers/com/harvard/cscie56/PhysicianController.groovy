@@ -52,7 +52,7 @@ class PhysicianController {
             def webRootDir = servletContext.getRealPath("/")
             def tmpDir = new File(webRootDir, "/tmp")
             tmpDir.mkdir()
-            File newFile = new File(tmpDir, pictureFile.originalFilename)
+            File newFile = new File("/tmp", pictureFile.originalFilename)
             pictureFile.transferTo(newFile)
             fileUploadService.upload(newFile, newFileName)
 
