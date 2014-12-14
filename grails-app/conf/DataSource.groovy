@@ -1,3 +1,9 @@
+grails {
+    mongo {
+        connectionString = "mongodb://cscie56:harvard@ds061620.mongolab.com:61620/cscie56-physiciandb"
+    }
+}
+
 dataSource {
     pooled = true
     jmxExport = true

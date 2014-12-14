@@ -72,7 +72,7 @@ grails.project.dependency.resolution = {
         compile ":spring-security-core:2.0-RC4"
         compile ":mongodb:3.0.2"
 
-        compile ":heroku:1.0.1"
+        compile(":heroku:1.0.1"){excludes 'database-session'}
         compile ":cloud-support:1.0.11"
 
 
