@@ -49,9 +49,9 @@ class PhysicianController {
             String originalFileExtension = pictureFile.originalFilename.substring(pictureFile.originalFilename.lastIndexOf("."))
             String newFileName = newFileNameBase + originalFileExtension
 
-            def webRootDir = servletContext.getRealPath("/")
-            def tmpDir = new File(webRootDir, "/tmp")
-            tmpDir.mkdir()
+            //def webRootDir = servletContext.getRealPath("/")
+            //def tmpDir = new File(webRootDir, "/tmp")
+            //tmpDir.mkdir()
             File newFile = new File("/tmp", pictureFile.originalFilename)
             pictureFile.transferTo(newFile)
             fileUploadService.upload(newFile, newFileName)
