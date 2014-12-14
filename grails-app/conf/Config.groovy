@@ -126,11 +126,6 @@ log4j = {
 
 }
 
-// AWS SDK
-grails.plugin.awssdk.accessKey = 'AKIAJBXSPGEHD6IVKTRQ'
-grails.plugin.awssdk.secretKey = '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'
-grails.plugin.awssdk.region = 'us-west-2'
-
 
 // Added by the Spring Security Core plugin:
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'com.harvard.cscie56.User'
