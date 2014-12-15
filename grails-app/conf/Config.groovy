@@ -126,6 +126,9 @@ log4j = {
 
 }
 
+// AWS SDK
+
+
 
 // Added by the Spring Security Core plugin:
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'com.harvard.cscie56.User'

@@ -5,12 +5,12 @@ import grails.plugin.springsecurity.annotation.Secured
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
-@Transactional(readOnly = true)
 @Secured(['ROLE_USER','ROLE_ADMIN'])
 class PhysicianController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "DELETE"]
 
+    def dataService
     def fileUploadService
 
     @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
@@ -30,7 +30,6 @@ class PhysicianController {
         respond new Physician(params)
     }
 
-    @Transactional
     def save(Physician physicianInstance) {
         if (physicianInstance == null) {
             notFound()
@@ -59,7 +58,7 @@ class PhysicianController {
             physicianInstance.picturePath = "https://s3-us-west-2.amazonaws.com/cscie56-final/" + newFileName
         }
 
-        physicianInstance.save flush:true
+        dataService.save(physicianInstance)
 
         request.withFormat {
             form multipartForm {
@@ -74,7 +73,6 @@ class PhysicianController {
         respond physicianInstance
     }
 
-    @Transactional
     def update(Physician physicianInstance) {
         if (physicianInstance == null) {
             notFound()
@@ -93,9 +91,9 @@ class PhysicianController {
             String originalFileExtension = pictureFile.originalFilename.substring(pictureFile.originalFilename.lastIndexOf("."))
             String newFileName = newFileNameBase + originalFileExtension
 
-            def webRootDir = servletContext.getRealPath("/")
-            def tmpDir = new File(webRootDir, "/tmp")
-            tmpDir.mkdir()
+            //def webRootDir = servletContext.getRealPath("/")
+            //def tmpDir = new File(webRootDir, "/tmp")
+            //tmpDir.mkdir()
             File newFile = new File(tmpDir, pictureFile.originalFilename)
             pictureFile.transferTo(newFile)
             fileUploadService.upload(newFile, newFileName)
@@ -103,7 +101,7 @@ class PhysicianController {
             physicianInstance.picturePath = "https://s3-us-west-2.amazonaws.com/cscie56-final/" + newFileName
         }
 
-        physicianInstance.save flush:true
+        dataService.save(physicianInstance)
 
         request.withFormat {
             form multipartForm {
@@ -114,7 +112,6 @@ class PhysicianController {
         }
     }
 
-    @Transactional
     def delete(Physician physicianInstance) {
 
         if (physicianInstance == null) {
@@ -122,7 +119,7 @@ class PhysicianController {
             return
         }
 
-        physicianInstance.delete flush:true
+        dataService.delete(physicianInstance)
 
         request.withFormat {
             form multipartForm {

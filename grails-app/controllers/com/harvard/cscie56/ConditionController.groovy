@@ -5,11 +5,12 @@ import grails.plugin.springsecurity.annotation.Secured
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
-@Transactional(readOnly = true)
 @Secured(['ROLE_USER','ROLE_ADMIN'])
 class ConditionController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+
+    def dataService
 
     @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
     def index(Integer max) {
@@ -26,7 +27,6 @@ class ConditionController {
         respond new Condition(params)
     }
 
-    @Transactional
     def save(Condition conditionInstance) {
         if (conditionInstance == null) {
             notFound()
@@ -38,7 +38,7 @@ class ConditionController {
             return
         }
 
-        conditionInstance.save flush:true
+        dataService.save(conditionInstance)
 
         request.withFormat {
             form multipartForm {
@@ -53,7 +53,6 @@ class ConditionController {
         respond conditionInstance
     }
 
-    @Transactional
     def update(Condition conditionInstance) {
         if (conditionInstance == null) {
             notFound()
@@ -65,7 +64,7 @@ class ConditionController {
             return
         }
 
-        conditionInstance.save flush:true
+        dataService.save(conditionInstance)
 
         request.withFormat {
             form multipartForm {
@@ -76,7 +75,6 @@ class ConditionController {
         }
     }
 
-    @Transactional
     def delete(Condition conditionInstance) {
 
         if (conditionInstance == null) {
@@ -84,7 +82,7 @@ class ConditionController {
             return
         }
 
-        conditionInstance.delete flush:true
+        dataService.delete(conditionInstance)
 
         request.withFormat {
             form multipartForm {

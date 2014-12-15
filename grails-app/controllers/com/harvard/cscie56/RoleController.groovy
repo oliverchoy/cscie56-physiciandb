@@ -6,10 +6,11 @@ import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
 @Secured(['ROLE_ADMIN'])
-@Transactional(readOnly = true)
 class RoleController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+
+    def dataService
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -24,7 +25,6 @@ class RoleController {
         respond new Role(params)
     }
 
-    @Transactional
     def save(Role roleInstance) {
         if (roleInstance == null) {
             notFound()
@@ -36,7 +36,7 @@ class RoleController {
             return
         }
 
-        roleInstance.save flush:true
+        dataService.save(roleInstance)
 
         request.withFormat {
             form multipartForm {
@@ -51,7 +51,6 @@ class RoleController {
         respond roleInstance
     }
 
-    @Transactional
     def update(Role roleInstance) {
         if (roleInstance == null) {
             notFound()
@@ -63,7 +62,7 @@ class RoleController {
             return
         }
 
-        roleInstance.save flush:true
+        dataService.save(roleInstance)
 
         request.withFormat {
             form multipartForm {
@@ -74,7 +73,6 @@ class RoleController {
         }
     }
 
-    @Transactional
     def delete(Role roleInstance) {
 
         if (roleInstance == null) {
@@ -82,7 +80,7 @@ class RoleController {
             return
         }
 
-        roleInstance.delete flush:true
+        dataService.delete(roleInstance)
 
         request.withFormat {
             form multipartForm {
