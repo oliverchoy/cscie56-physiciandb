@@ -84,6 +84,8 @@ grails.project.dependency.resolution = {
         // for AWS S3 integration - for physicians pictures
         runtime ':aws-sdk:1.9.9.1'
 
+        runtime ':twitter-bootstrap:3.3.1'
+
 
         // Uncomment these to enable additional asset-pipeline capabilities
         //compile ":sass-asset-pipeline:1.9.0"

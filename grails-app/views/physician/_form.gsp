@@ -1,6 +1,6 @@
 <%@ page import="com.harvard.cscie56.Physician" %>
 
-<div class="fieldcontain ${hasErrors(bean: physicianInstance, field: 'firstName', 'error')} ">
+<div class="form-group fieldcontain ${hasErrors(bean: physicianInstance, field: 'firstName', 'error')} ">
     <label for="firstName">
         <g:message code="physician.firstName.label" default="First Name" />
     </label>
@@ -8,14 +8,14 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: physicianInstance, field: 'lastName', 'error')} ">
+<div class="form-group fieldcontain ${hasErrors(bean: physicianInstance, field: 'lastName', 'error')} ">
     <label for="lastName">
         <g:message code="physician.lastName.label" default="Last Name" />
     </label>
     <g:textField name="lastName" value="${physicianInstance?.lastName}" />
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: physicianInstance, field: 'npi', 'error')} ">
+<div class="form-group fieldcontain ${hasErrors(bean: physicianInstance, field: 'npi', 'error')} ">
     <label for="npi">
         <g:message code="physician.npi.label" default="NPI" />
     </label>
@@ -23,21 +23,20 @@
 </div>
 
 
-<div class="fieldcontain ${hasErrors(bean: physicianInstance, field: 'picturePath', 'error')} ">
+<div class="form-group fieldcontain ${hasErrors(bean: physicianInstance, field: 'picturePath', 'error')} ">
     <label for="picturePath">
         <g:message code="physician.picturePath.label" default="Picture" />
     </label>
-    <div style="float:right;">
+    <input type="file" name="physicianPicture" />
+</div>
+<div style="float:right;">
     <g:if test="${physicianInstance?.picturePath}">
         <img src="${physicianInstance?.picturePath}" width="100"/><br/>
         Upload a new file to replace current picture.<br/>
     </g:if>
-    </div>
-    <input type="file" name="physicianPicture" />
-
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: physicianInstance, field: 'clinics', 'error')} ">
+<div class="form-group fieldcontain ${hasErrors(bean: physicianInstance, field: 'clinics', 'error')} ">
 	<label for="clinics">
 		<g:message code="physician.clinics.label" default="Clinics" />
 	</label>
@@ -56,7 +55,7 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: physicianInstance, field: 'publications', 'error')} ">
+<div class="form-group fieldcontain ${hasErrors(bean: physicianInstance, field: 'publications', 'error')} ">
 	<label for="publications">
 		<g:message code="physician.publications.label" default="Publications" />
 		
